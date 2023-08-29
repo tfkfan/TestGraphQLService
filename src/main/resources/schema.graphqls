@@ -1,0 +1,77 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    createCategory(code: String!, name: String!, description: String, parentCategoryCode: String): CategoryResult
+    updateCategory(code: String!, name: String, description: String, isHidden: Boolean, parentCategoryCode: String): CategoryResult
+    createModel(code: String!, name: String!, description: String): ModelResult
+    updateModel(code: String!, name: String, description: String): ModelResult
+    linkCategoryToModel(categoryCode: String!, modelCode: String!): CategoryModelResult
+    unlinkCategoryToModel(categoryCode: String!, modelCode: String!): CategoryModelResult
+}
+
+type Query {
+    findCategories(codes: [String], name: String, description: String, parentCategoryCodes: [String], isHidden: Boolean, onlyParent: Boolean, pageSettings: PageSettings): CategoryListResult!
+    findModels(codes: [String], name: String, description: String, pageSettings: PageSettings): ModelListResult
+    findModelsByCategoryCode(categoryCode: String!, pageSettings: PageSettings): CategoryModelsResult
+}
+
+input PageSettings {
+    pageNum: Int!
+    pageSize: Int!
+    sortField: String
+    descending: Boolean
+}
+
+type CategoryResult {
+    category: Category
+}
+
+type ModelResult {
+    model: Model
+}
+
+type CategoryModelResult {
+    category: Category
+    model: Model
+}
+
+type Category {
+    code: String!
+    name: String!
+    description: String
+    parentCategory: Category
+    isHidden: Boolean!
+}
+
+type Model {
+    code: String!
+    name: String!
+    description: String
+}
+
+type CategoryListResult {
+    categories: [Category]
+    pageInfo: PageInfo
+}
+
+type ModelListResult {
+    models: [Model]
+    pageInfo: PageInfo
+}
+
+type CategoryModelsResult {
+    category: Category
+    models: [Model]
+    pageInfo: PageInfo
+}
+
+type PageInfo {
+    pageNum: Int!
+    pageSize: Int!
+    pageTotal: Int!
+    itemsCount: Int!
+    hasNextPage: Boolean!
+}
