@@ -111,18 +111,6 @@ sh docker-build-deploy.sh
 
 Больше информации на [Using Docker and Docker-Compose][]
 
-Сервисы доступны по адресам
-
-```
-localhost:8080/ws/v1/categoryservice?wsdl
-localhost:8080/ws/v1/modelservice?wsdl
-localhost:8080/ws/v1/categorymodelservice?wsdl
-
-localhost:8080/categoryService/v1[\?]+wsdl
-localhost:8080/modelService/v1[\?]+wsdl
-localhost:8080/categoryModelService/v1[\?]+wsdl
-```
-
 ## Continuous Integration (optional)
 
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
